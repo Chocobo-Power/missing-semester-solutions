@@ -57,7 +57,7 @@ total 0
 ```
 My user can't execute this file.
 
-### 7. Run the command by explicitly starting the sh interpreter, and giving it the file semester as the first argument, i.e. sh semester. Why does this work, thile ./semester didn't?
+### 7. Run the command by explicitly starting the sh interpreter, and giving it the file semester as the first argument, i.e. sh semester. Why does this work, while ./semester didn't?
 
 
 With sh semester we can execute the script and see the output printed in the terminal.
@@ -94,6 +94,8 @@ The sh program will read and interpret the semester file.
 ```
 $ man chmod
 ```
+Friendlier chmod tutorial: https://ss64.com/bash/chmod.html
+
 
 ### 9. Use chmod to make it possible to run the command ./semester rather than having to type sh semester. How does your shell know that the file is supposed to be interpreted using sh?
 
@@ -107,7 +109,7 @@ The shell knows how to interpret the file using sh thanks to the shebang at the 
 
 ### 10. Use | and > to write the "last modified" date output by semester into a file called last-modified.txt in your home directory
 
-This question was a little confusing at first. I thought we were supposed to get the "last modified" date of the file itself, which can be done by executing date -r semester
+This question was a little confusing at first. I thought we were supposed to get the "last modified" date of the file itself, which can be done by executing `date -r semester`
 
 But we want the "last modified" output from executing the ./semester script, so we need to find it with something like grep.
 

@@ -1,25 +1,32 @@
-### 1. Make sure you're running an appropriate shell.
+### 1) Make sure you're running an appropriate shell.
 ```
 echo $SHELL
 ```
-It should say something like **/bin/bash** or **/usr/bin/zsh**
+It should say something like '/bin/bash' or '/usr/bin/zsh'. This will print the shell for the current user, but not necessarily the shell that is running at the moment. For instance, I have a Manjaro installation that has 'bash' as the default shell, but uses 'zsh' when you open the Konsole.
 
-### 2. Create a new directory called missing under /tmp
+Display your current shell name reliably
+```
+$ ps -p $$
+  PID TTY          TIME CMD
+  1293 tty2     00:00:00 bash
+```
+
+### 2) Create a new directory called missing under /tmp
 ```
 mkdir /tmp/missing
 ```
 
-### 3. Look up the touch program. The man program is your friend
+### 3) Look up the touch program. The man program is your friend
 ```
 man touch
 ```
 
-### 4. Use touch to create a file called semester in missing
+### 4) Use touch to create a file called semester in missing
 ```
 touch /tmp/missing/semester
 ```
 
-### 5. Write the following into that file, one line at a time
+### 5) Write the following into that file, one line at a time
 ```
 #!/bin/sh
 curl --head --silent https://missing.csail.mit.edu
@@ -41,7 +48,7 @@ Then we can append the second line with >>
 $ echo "curl --head --silent https://missing.csail.mit.edu >> semester"
 ```
 
-### 6. Try to ececute the file, i.e. type the path to the script (./semester) into your shell and press enter. Understand why it doesn't work by consulting the output of ls.
+### 6) Try to ececute the file, i.e. type the path to the script (./semester) into your shell and press enter. Understand why it doesn't work by consulting the output of ls.
 
 Try to execute the script.
 ```
@@ -57,7 +64,7 @@ total 0
 ```
 My user can't execute this file.
 
-### 7. Run the command by explicitly starting the sh interpreter, and giving it the file semester as the first argument, i.e. sh semester. Why does this work, while ./semester didn't?
+### 7) Run the command by explicitly starting the sh interpreter, and giving it the file semester as the first argument, i.e. sh semester. Why does this work, while ./semester didn't?
 
 
 With sh semester we can execute the script and see the output printed in the terminal.
@@ -90,14 +97,14 @@ We have permission to run the sh program and to read the semester file.
 The sh program will read and interpret the semester file.
 
 
-### 8. Look up the chmod program (e.g. use man chmod).
+### 8) Look up the chmod program (e.g. use man chmod).
 ```
 $ man chmod
 ```
 Friendlier chmod tutorial: https://ss64.com/bash/chmod.html
 
 
-### 9. Use chmod to make it possible to run the command ./semester rather than having to type sh semester. How does your shell know that the file is supposed to be interpreted using sh?
+### 9) Use chmod to make it possible to run the command ./semester rather than having to type sh semester. How does your shell know that the file is supposed to be interpreted using sh?
 
 ```
 $ chmod 744 semester
@@ -107,7 +114,7 @@ We upgrade the permissions of the creator user (owner) of the file, so it also h
 The shell knows how to interpret the file using sh thanks to the shebang at the first line: #!/bin/sh
 
 
-### 10. Use | and > to write the "last modified" date output by semester into a file called last-modified.txt in your home directory
+### 10) Use | and > to write the "last modified" date output by semester into a file called last-modified.txt in your home directory
 
 This question was a little confusing at first. I thought we were supposed to get the "last modified" date of the file itself, which can be done by executing `date -r semester`
 
@@ -124,11 +131,13 @@ Then we can redirect the output of grep to the last-modified.txt file
 $ ./semester | grep last-modified > ~/last-modifiet.txt
 ```
 
-Alternative: We can get rid of the "last-modified:" substring by using cut
+
+Alternative:
+We can get rid of the "last-modified:" substring by using cut
+Source: https://medium.com/@rw2268/the-missing-semester-of-your-cs-education-course-overview-the-shell-c8bc31f26b77
 ```
 $ ./semester | grep -i last | cut -d ' ' -f 2- > ~/last-modifiet.txt
 ```
-Source: https://medium.com/@rw2268/the-missing-semester-of-your-cs-education-course-overview-the-shell-c8bc31f26b77
 
 Let's check the contents of the last-modified.txt file
 ```
@@ -136,8 +145,7 @@ $ more ~/last-modified.txt
 Wed Sep 21 10:44:46 -05 2022
 ```
 
-
-### 11. Write a command that reads out your laptop battery's power level or your desktop machine's CPU temperature from /sys. Note: if you're a macOS user, your OS doesn't have a sysfs, so you can skip this exercise.
+### 11) Write a command that reads out your laptop battery's power level or your desktop machine's CPU temperature from /sys. Note: if you're a macOS user, your OS doesn't have a sysfs, so you can skip this exercise.
 
 ```
 cat /sys/class/thermal/thermal_zone0/temp

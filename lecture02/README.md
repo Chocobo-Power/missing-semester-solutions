@@ -146,3 +146,18 @@ echo "Runs until error: $count"
 ```
 
 **For some reason it's omitting the line jumps when printing the contents of the files.**
+
+
+### 4) Write a command that recursively finds all HTML files in the folder and makes a zip with them. Your command should work even if the files have spaces.
+Source: https://github.com/anthonyjatoba/missing-semester/tree/master/lecture02
+
+Create some files.
+```
+$ touch file-{a..j}.html image-{1..10}.jpg 'file\ with\ spaces\ {k..z}.html'
+```
+
+Create zip with only the html files, including the files with spaces.
+```
+$ find . -name '*.html' | xargs -d '\n' tar czf teste.tar
+```
+
